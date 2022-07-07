@@ -4,7 +4,8 @@ from django.http import HttpResponse
 # Create your views here.
 
 def index(request):
-    return HttpResponse('Главная страница')
+    templates = 'posts/index.html'
+    return render(request, templates)
 
 def group(request):
     return HttpResponse('Список групп')
