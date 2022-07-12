@@ -1,6 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
-from .models import Post
+from .models import Group, Post
 # Create your views here.
 
 def index(request):
@@ -25,7 +25,14 @@ def group_list(request):
     }
     return render(request, templates, context)
 
-def group(requst, slug):
-    return HttpResponse(f'Группа: {slug}')
 
+def group_posts(request, slug):
+    templates = 'posts/group_list.html'
+    group = get_object_or_404(Group, slug=slug)
+    posts = Post.objects.filter(group=group).order_by('-pub_date')[:10]
+    context = {
+        'group': group,
+        'posts': posts,
+    }
+    return render(request, templates, context) 
 
