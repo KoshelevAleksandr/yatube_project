@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse
 from .models import Group, Post
 # Create your views here.
+
 
 def index(request):
     templates = 'posts/index.html'
@@ -14,6 +14,7 @@ def index(request):
         'posts': posts,
     }
     return render(request, templates, context)
+
 
 def group_list(request):
     templates = 'posts/group_list.html'
@@ -34,5 +35,4 @@ def group_posts(request, slug):
         'group': group,
         'posts': posts,
     }
-    return render(request, templates, context) 
-
+    return render(request, templates, context)
